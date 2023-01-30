@@ -1,0 +1,77 @@
+/* Add some basic styling to the page */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: rgb(2, 2, 36);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+main{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 30px;
+    margin: 0 30px;
+}
+main input.typeText{
+    min-width: 100%;
+    background: transparent;
+    border: none;
+    margin-top: 10px;
+    border-bottom: 1px solid white;
+    padding: 10px;
+    font-size: 20px;
+    color: white;
+}
+main input.typeRadio{
+    /* font-size: 25px; */
+}
+main .radioContainer{
+    margin-top: 20px;
+    font-size: 25px;
+}
+main .radioContainer div{
+    margin-top: 5px;
+}
+main button {
+    color: rgb(243, 231, 231);
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient( 45deg, #ff0909, #1d19ed);
+    border: none;
+    width: 50px;
+    height: 50px;
+    margin: 20px;
+    border-radius: 10px;
+    letter-spacing: 0px;
+    font-size: -webkit-xxx-large;
+    font-family: fangsong;
+}
+main button p{
+    margin-top: 40px;
+    text-shadow: 2.5px 3.5px 2px #0009ff;
+}
+main
+select{
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  font-size: 17px;
+  margin-top: 20px;
+  background-color: #f2f2f200;
+  border: 1px solid;
+  color: white;
+}
+
+
+

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./CSS/roomCreation.css">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+  <main id="main_container"></main>
+  <script>
+    const socket = io('http://localhost:3003');
+    const userNameInLocalStorage = 'userNameInWebgame';
+    const roomInfoCookie = 'webGameRoomInfo';
+    const formQuestionsForRoomConfiguration = {
+      userName : {type:"input", content:`Please tell me your name?<input class="typeText" id="userName" type="text"/>`},
+      createRoom : {type:"radio", content:`Are you want to <div class="radioContainer"><div><input class="typeRadio" type="radio" name="createRoom" value="true"> Create Room </div><br/><div><input class="radioContainer" type="radio" name="createRoom" value="false"> Join Room</div></div>`},
+      roomName: {type:"input", content:`Please tell the room name?<input class="typeText" id="roomName" type="text"/>`},
+      roomType : {type:"radio", content:`Please select the room type <div class="radioContainer"><div><input class="typeRadio" type="radio" name="roomType" value="public"> Public </div><br/><div><input class="typeRadio" type="radio" name="roomType" value="private"> Private</div></div>`},
+      roomPassword : {type:"input", content:`Please fill the password<input class="typeText" id="roomPassword" type="password"/>`},
+    }
+    const questionsLength = Object.keys(formQuestionsForRoomConfiguration).length;
+    const isUserNameAvailable = window.localStorage.getItem('userNameInLocalStorage') ? window.localStorage.getItem('userNameInLocalStorage') : '';
+    let index = 0;
+    showQuestion(index);
+
+    function showQuestion(index){
+      document.getElementById('main_container').innerHTML = formQuestionsForRoomConfiguration[Object.keys(formQuestionsForRoomConfiguration)[index]].content + `<button onclick="nextBtnClick()"><p>></p></button>`
+    }
+
+    function nextBtnClick(){
+      const data = formQuestionsForRoomConfiguration[Object.keys(formQuestionsForRoomConfiguration)[index]];
+      var finalSubmit = false;
+      const type = data.type;
+      const value = type === 'input' ? $('#main_container input').val() : $('#main_container input:checked').val();
+
+      if(value === '' || value === undefined){
+        return alert('Please enter details');
+      }
+      formQuestionsForRoomConfiguration[Object.keys(formQuestionsForRoomConfiguration)[index]] = value;
+      index += 1;
+      if( index <= (questionsLength-1)){
+        if(Object.keys(formQuestionsForRoomConfiguration)[index-1] === 'roomType' && value === 'public'){
+          finalSubmit = true;
+        }else{
+          showQuestion(index);
+        }
+      }else{
+        finalSubmit = true;
+      }
+
+      if(finalSubmit === true){
+        processRoom(formQuestionsForRoomConfiguration);
+      }
+    }
+
+
+    function processRoom(formQuestionsForRoomConfiguration){
+      if(formQuestionsForRoomConfiguration.roomType === 'public'){
+        formQuestionsForRoomConfiguration.roomPassword = '';
+      }
+      const roomName = formQuestionsForRoomConfiguration.roomName;
+      const roomData = formQuestionsForRoomConfiguration;
+
+      
+      const roomConfig = {roomName: roomName, roomData: roomData};
+      window.localStorage.setItem(roomInfoCookie, JSON.stringify(roomConfig));
+      window.location.assign('/chatRoom.html');
+    }
+  </script>
+
+</body>
+</html>

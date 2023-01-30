@@ -1,0 +1,115 @@
+*{
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f1f1f1;
+}
+#chat {
+  width: 100%;
+  margin: 0 auto;
+  height: 100%;
+}
+
+#messages {
+  height: calc(100vh - 70px);
+  overflow-y: scroll;
+  padding-top: 50px;
+  padding-bottom: 20px;
+  width: 100%;
+}
+
+#messages .msgitems{
+  padding: 5px;
+  color: white;
+  margin: 30px 10px 10px;
+  border-radius: 5px;
+  position: relative;
+}
+#messages .msgitems .userTag{
+  position: absolute;
+  z-index: 1;
+  top: -25px;
+  background: #f05c5d;
+  color: white;
+  padding: 3px 5px;
+  border-radius: 5px 5px 0px 0px;
+}
+#messages .msgitems.post-msg .userTag{
+  right: 0px;
+  border-radius: 10px 10px 0px 10px;
+  background: #f05c5d;
+}
+#messages .msgitems.get-msg .userTag{
+  left: 0px;
+  border-radius: 10px 10px 10px 0px;
+  background: #4caf50;
+}
+#messages .msgitems.post-msg{
+  background-image: linear-gradient(45deg, #ed7e7e, #ff7979);
+  text-align: right;
+}
+#messages .msgitems.get-msg{
+  background-image: linear-gradient(45deg, #33e4c2, #0581ff);
+  text-align: left;
+}
+
+#chat-form {
+  padding: 10px;
+  background-color: #f1f1f1;
+}
+
+#message-input {
+  width: 100%;
+  padding: 10px;
+  border: 0.5px solid #bcbaba;
+  margin-right: 5px;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+.sendBox{
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  padding: 5px 20px 0px;
+}
+button#sendmsgBtn, button#leaveButton{
+  background-image: linear-gradient(45deg, #33e4c2, #0581ff);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+button#leaveButton{
+  background-color: #f1571a;
+}
+
+button[type="submit"]:hover {
+  background-color: #45a049;
+}
+#topBar{
+  position: fixed;
+  color: white;
+  background-image: linear-gradient(45deg, #33e4c2, #0581ff);
+  width: 100%;
+  height: 45px;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+#roomName{
+  margin: 5px 15px;
+}
+#leaveButton{
+  margin: 5px 15px;
+}
+
